@@ -1,0 +1,12 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+
+<h1>Series</h1>
+
+<ul>
+{{ range $index, $series := .series }}
+<li>{{$series.Name}}</li>
+{{ end }}
+</ul>
+
+{{template "footer.html" .}}
