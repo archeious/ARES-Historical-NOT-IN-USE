@@ -64,3 +64,15 @@ func GetSeriesByName(n string) *Series {
 	}
 	return &Series{Name: name, Id: id}
 }
+
+func GetSeriesById(id int64) *Series {
+	const query = "SELECT id, name from series where id = ? "
+
+	var name string
+
+	row := app.DB.QueryRow(query, id)
+	if err := row.Scan(&id, &name); err != nil {
+		log.Fatal(err)
+	}
+	return &Series{Name: name, Id: id}
+}
