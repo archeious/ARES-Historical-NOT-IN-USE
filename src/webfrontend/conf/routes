@@ -4,7 +4,13 @@
 
 module:testrunner
 
-GET     /                                       App.Index
+GET     /                                       Series.Index
+
+GET	/series/:id				Series.Display
+GET	/series					Series.Index
+
+GET	/season/add/:seriesId			Season.Add
+
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
