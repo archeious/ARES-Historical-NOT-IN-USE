@@ -16,5 +16,6 @@ func (c Series) Index() revel.Result {
 
 func (c Series) Display(id int) revel.Result {
 	series := models.GetSeriesById(int64(id))
-	return c.Render(series)
+	seasons := series.GetSeasons()
+	return c.Render(series, seasons)
 }

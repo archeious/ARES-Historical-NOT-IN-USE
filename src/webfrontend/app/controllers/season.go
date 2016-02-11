@@ -21,5 +21,15 @@ func (c Season) Display(id int) revel.Result {
 
 func (c Season) Add(seriesId int) revel.Result {
 	series := models.GetSeriesById(int64(seriesId))
+	var name string
+	c.Params.Bind(&name, "name")
+
+	season := models.Season{Name: name, Series: series}
+	season.Add()
+	return c.Render(series)
+}
+
+func (c Season) AddForm(seriesId int) revel.Result {
+	series := models.GetSeriesById(int64(seriesId))
 	return c.Render(series)
 }
