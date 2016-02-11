@@ -5,11 +5,14 @@
 module:testrunner
 
 GET     /                                       Series.Index
+GET     /about                                  App.About
+GET     /contact                                App.Contact
 
 GET	/series/:id				Series.Display
 GET	/series					Series.Index
 
-GET	/season/add/:seriesId			Season.Add
+GET	/season/add/:seriesId			Season.AddForm
+POST	/season/add/:seriesId			Season.Add
 
 
 # Ignore favicon requests

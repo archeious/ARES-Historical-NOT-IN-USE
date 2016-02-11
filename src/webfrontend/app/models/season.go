@@ -45,3 +45,32 @@ func (s *Season) Add() {
 	}
 	s.uuid = int64(id)
 }
+
+func GetSeasonsBySeriesId(seriesId int64) []Season {
+
+	const query = "SELECT id, name from season where series_id = ?"
+
+	var name string
+	var id int64
+	seasons := make([]Season, 0)
+
+	rows, err := app.DB.Query(query, seriesId)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		err := rows.Scan(&id, &name)
+		if err != nil {
+			log.Fatal(err)
+		}
+		seasons = append(seasons, Season{Name: name, uuid: id})
+	}
+	err = rows.Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return seasons
+}
