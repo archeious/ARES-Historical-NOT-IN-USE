@@ -8,6 +8,7 @@ GET     /                                       Series.Index
 GET     /about                                  App.About
 GET     /contact                                App.Contact
 
+GET	/series/:id/beta			Series.DisplayTest
 GET	/series/:id				Series.Display
 GET	/series					Series.Index
 
@@ -19,7 +20,8 @@ POST	/season/add/:seriesId			Season.Add
 GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
-GET     /public/*filepath                       Static.Serve("public")
+GET     /public/*filepath                         Static.Serve("public")
+GET     /img/*filepath                         	  Static.Serve("public/img")
 
 # Catch all
 *       /:controller/:action                    :controller.:action

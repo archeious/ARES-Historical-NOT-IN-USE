@@ -3,3 +3,6 @@
 /src/github.com
 /src/golang.org
 /src/gopkg.in
+/src/webfrontend/public/img
+revel.log
+anime.sql3

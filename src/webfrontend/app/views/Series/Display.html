@@ -15,19 +15,25 @@
 
 <div class="row">
   <div class="col-lg-3 col-md-3 col-sm-4">
-    <h2>Seasons/Arcs</h2>
-    <div>
-      <ul class="list-group table-of-contents">
-      {{ range $index, $season := .seasons }}
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>Seasons/Arcs</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+        {{ range $index, $season := .seasons }}
         <li class="list-group-item">{{$season.Name}}</li>
-      {{ end }}
-      </ul>
+        {{ end }}
+        </ul>
+        <a href="/season/add/{{.series.Id}}">Add Season</a>
+      </div>
     </div>
-    <a href="/season/add/{{.series.Id}}">Add Season</a>
+  </div>
+  <div class="col-lg-9 col-md-9 col-sm-8">
+	  CONTENT</br>MORE CONTENT
   </div>
 </div>
 
 
-</div>
 
 {{template "footer.html" . }}
