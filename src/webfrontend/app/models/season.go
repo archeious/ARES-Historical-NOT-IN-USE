@@ -7,7 +7,7 @@ import (
 )
 
 type Season struct {
-	uuid     int64
+	Id       int64
 	Name     string
 	Series   *Series
 	Episodes *[]Episode
@@ -43,7 +43,7 @@ func (s *Season) Add() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	s.uuid = int64(id)
+	s.Id = int64(id)
 }
 
 func GetSeasonsBySeriesId(seriesId int64) []Season {
@@ -65,7 +65,7 @@ func GetSeasonsBySeriesId(seriesId int64) []Season {
 		if err != nil {
 			log.Fatal(err)
 		}
-		seasons = append(seasons, Season{Name: name, uuid: id})
+		seasons = append(seasons, Season{Name: name, Id: id})
 	}
 	err = rows.Err()
 	if err != nil {

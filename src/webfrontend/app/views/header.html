@@ -9,13 +9,21 @@
     {{range .moreStyles}}
       <link rel="stylesheet" type="text/css" href="/public/{{.}}">
     {{end}}
+    <style>
+      html {
+        overflow-y: scroll;
+      }
+      body {
+	padding-top: 65px;
+      }
+    </style>
     {{range .moreScripts}}
       <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
     {{end}}
   </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-fixed-top">
 <div class="container">
 <div class="navbar-header">
   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -42,4 +50,4 @@
 </div><!--/.nav-collapse -->
 </div>
 </nav>
-<div class="contatiner-fluid">
+<div class="container">
