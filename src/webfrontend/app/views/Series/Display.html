@@ -1,39 +1,96 @@
 {{set . "title" "Home"}}
 {{template "header.html" .}}
 
-  <div class="row">
-    <div class="col-lg-8 col-md-7 col-sm-6">
-      <h1>{{.series.Name}}</h1>
-    </div>
 
-    <div class="col-lg-4 col-md-5 col-sm-6">
-      <div class="sponsor">
-        <h1>SPONSOR</h1>
-      </div>
-    </div>
-  </div>
 
-<div class="row">
-  <div class="col-lg-3 col-md-3 col-sm-4">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Seasons/Arcs</h3>
-      </div>
-      <div class="panel-body">
-        <ul class="list-group">
-        {{ range $index, $season := .seasons }}
-        <li class="list-group-item">{{$season.Name}}</li>
-        {{ end }}
-        </ul>
-        <a href="/season/add/{{.series.Id}}">Add Season</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-9 col-md-9 col-sm-8">
-	  CONTENT</br>MORE CONTENT
-  </div>
-</div>
+        <!-- Portfolio Item Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+		    <h1 class="page-header">{{.series.Name}}</h1>
+            </div>
+        </div>
+        <!-- /.row -->
 
+        <!-- Portfolio Item Row -->
+        <div class="row">
+
+            <div class="col-md-8">
+		    <img class="img-responsive" src="/img/main/{{.series.Id}}/main.png" alt="">
+            </div>
+
+            <div class="col-md-4">
+		<h3>Synopsis</h3>
+		<p>{{.series.Description}}</p>
+                <h3>Project Details</h3>
+                <ul>
+                    <li>Lorem Ipsum</li>
+                    <li>Dolor Sit Amet</li>
+                    <li>Consectetur</li>
+                    <li>Adipiscing Elit</li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Random Story Arcs</h3>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+	    {{$arc := index .seasons (.rng.Intn (len .seasons))}}
+		    <a href="/season/{{$arc.Id}}">
+		    <div class="panel panel-default">
+			<div class="panel-heading" style="text-align: center">{{$arc.Name}}</div>
+			<div class="panel-body">
+				<img class="img-responsive portfolio-item" src="/img/thumbnails/{{.series.Id}}/{{$arc.Id}}/thumb.png" alt="">
+	   		</div>
+		    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+	    {{$arc := index .seasons (.rng.Intn (len .seasons))}}
+		    <a href="/season/{{$arc.Id}}">
+		    <div class="panel panel-default">
+			<div class="panel-heading" style="text-align: center">{{$arc.Name}}</div>
+			<div class="panel-body">
+				<img class="img-responsive portfolio-item" src="/img/thumbnails/{{.series.Id}}/{{$arc.Id}}/thumb.png" alt="">
+	   		</div>
+		    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+	    {{$arc := index .seasons (.rng.Intn (len .seasons))}}
+		    <a href="/season/{{$arc.Id}}">
+		    <div class="panel panel-default">
+			<div class="panel-heading" style="text-align: center">{{$arc.Name}}</div>
+			<div class="panel-body">
+				<img class="img-responsive portfolio-item" src="/img/thumbnails/{{.series.Id}}/{{$arc.Id}}/thumb.png" alt="">
+	   		</div>
+		    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+	    {{$arc := index .seasons (.rng.Intn (len .seasons))}}
+		    <a href="/season/{{$arc.Id}}">
+		    <div class="panel panel-default">
+			<div class="panel-heading" style="text-align: center">{{$arc.Name}}</div>
+			<div class="panel-body">
+				<img class="img-responsive portfolio-item" src="/img/thumbnails/{{.series.Id}}/{{$arc.Id}}/thumb.png" alt="">
+	   		</div>
+		    </div>
+                </a>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
 
 
 {{template "footer.html" . }}

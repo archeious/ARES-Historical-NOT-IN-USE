@@ -7,9 +7,10 @@ import (
 )
 
 type Series struct {
-	Id      int64
-	Seasons []*Season
-	Name    string
+	Id          int64
+	Seasons     []*Season
+	Name        string
+	Description string
 }
 
 func (s *Series) String() string {
@@ -52,10 +53,11 @@ func (s *Series) EpisodeCount() int64 {
 }
 
 func GetAllSeries() []*Series {
-	const query = "SELECT id, name from series"
+	const query = "SELECT id, name,description from series"
 	//const query = "SELECT ser.id, ser.name, case when temp.count>= 1 then temp.count else 0 end from series ser left join (select series_id, count(id) as count from season group by series_id) temp on temp.series_id = ser.id;"
 	var name string
 	var id int64
+	var desc string
 	series := make([]*Series, 0)
 
 	rows, err := app.DB.Query(query)
@@ -65,11 +67,11 @@ func GetAllSeries() []*Series {
 	defer rows.Close()
 
 	for rows.Next() {
-		err := rows.Scan(&id, &name)
+		err := rows.Scan(&id, &name, &desc)
 		if err != nil {
 			log.Fatal(err)
 		}
-		series = append(series, &Series{Name: name, Id: id})
+		series = append(series, &Series{Name: name, Id: id, Description: desc})
 	}
 	err = rows.Err()
 	if err != nil {
@@ -80,26 +82,28 @@ func GetAllSeries() []*Series {
 }
 
 func GetSeriesByName(n string) *Series {
-	const query = "SELECT id, name from series where name = ? "
+	const query = "SELECT id, name,desc from series where name = ? "
 
 	var name string
 	var id int64
+	var desc string
 
 	row := app.DB.QueryRow(query, n)
-	if err := row.Scan(&id, &name); err != nil {
+	if err := row.Scan(&id, &name, &desc); err != nil {
 		log.Fatal(err)
 	}
-	return &Series{Name: name, Id: id}
+	return &Series{Name: name, Id: id, Description: desc}
 }
 
 func GetSeriesById(id int64) *Series {
-	const query = "SELECT id, name from series where id = ? "
+	const query = "SELECT id, name, description from series where id = ? "
 
 	var name string
+	var desc string
 
 	row := app.DB.QueryRow(query, id)
-	if err := row.Scan(&id, &name); err != nil {
+	if err := row.Scan(&id, &name, &desc); err != nil {
 		log.Fatal(err)
 	}
-	return &Series{Name: name, Id: id}
+	return &Series{Name: name, Id: id, Description: desc}
 }
