@@ -17,16 +17,10 @@ func (c Series) Index() revel.Result {
 }
 
 func (c Series) Display(id int) revel.Result {
-	series := models.GetSeriesById(int64(id))
-	seasons := series.GetSeasons()
-	return c.Render(series, seasons)
-}
-
-func (c Series) DisplayTest(id int) revel.Result {
-
+	user := models.FindOrCreate("guest")
 	s1 := rand.NewSource(time.Now().UnixNano())
 	rng := rand.New(s1)
 	series := models.GetSeriesById(int64(id))
 	seasons := series.GetSeasons()
-	return c.Render(series, seasons, rng)
+	return c.Render(series, seasons, rng, user)
 }

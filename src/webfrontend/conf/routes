@@ -8,7 +8,10 @@ GET     /                                       Series.Index
 GET     /about                                  App.About
 GET     /contact                                App.Contact
 
-GET	/series/:id/beta			Series.DisplayTest
+
+GET     /user/auth/twitter                      Account.Authenticate
+
+
 GET	/series/:id				Series.Display
 GET	/series					Series.Index
 
