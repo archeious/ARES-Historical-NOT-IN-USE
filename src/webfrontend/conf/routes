@@ -7,6 +7,12 @@ module:testrunner
 GET     /                                       Series.Index
 GET     /about                                  App.About
 GET     /contact                                App.Contact
+GET 	/login					App.Login
+POST	/login					App.Login
+GET	/logout					App.Logout
+POST	/register				App.Register
+GET	/register				App.Register
+
 
 
 GET     /user/auth/twitter                      Account.Authenticate

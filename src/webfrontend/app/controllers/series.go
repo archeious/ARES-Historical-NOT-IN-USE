@@ -13,14 +13,14 @@ type Series struct {
 
 func (c Series) Index() revel.Result {
 	series := models.GetAllSeries()
+	revel.INFO.Printf("%s\n", c.Session["Test"])
 	return c.Render(series)
 }
 
 func (c Series) Display(id int) revel.Result {
-	user := models.FindOrCreate("guest")
 	s1 := rand.NewSource(time.Now().UnixNano())
 	rng := rand.New(s1)
 	series := models.GetSeriesById(int64(id))
 	seasons := series.GetSeasons()
-	return c.Render(series, seasons, rng, user)
+	return c.Render(series, seasons, rng)
 }

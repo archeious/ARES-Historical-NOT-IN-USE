@@ -12,7 +12,6 @@ func initDB() {
 	revel.INFO.Println("DB Loading")
 
 	var err error
-
 	DB, err = sql.Open("sqlite3", "anime.sql3")
 	if err != nil {
 		revel.INFO.Println("DB Error", err)
@@ -32,15 +31,24 @@ func init() {
 		revel.ValidationFilter,        // Restore kept validation errors and save new ones from cookie.
 		revel.I18nFilter,              // Resolve the requested language
 		HeaderFilter,                  // Add some security based headers
-		revel.InterceptorFilter,       // Run interceptors around the action.
-		revel.CompressFilter,          // Compress the result.
-		revel.ActionInvoker,           // Invoke the action.
+		sessionFilter,
+		revel.InterceptorFilter, // Run interceptors around the action.
+		revel.CompressFilter,    // Compress the result.
+		revel.ActionInvoker,     // Invoke the action.
 	}
 	revel.OnAppStart(initDB)
 
 	// register startup functions with OnAppStart
 	// ( order dependent )
 	// revel.OnAppStart(FillCache)
+}
+
+var sessionFilter = func(c *revel.Controller, fc []revel.Filter) {
+	if user, ok := c.Session["user"]; ok {
+		c.RenderArgs["user"] = user
+	}
+
+	fc[0](c, fc[1:]) // Execute the next filter stage.
 }
 
 // TODO turn this into revel.HeaderFilter
